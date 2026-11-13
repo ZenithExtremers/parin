@@ -1,0 +1,55 @@
+:root { --brand: #FFB020; --ink: #1F2937; --muted: #6B7280; --card: #FFFFFF; --bg: #FFF6E5; --line: #F0E2C4;
+  --safe-t: env(safe-area-inset-top, 0px); --safe-b: env(safe-area-inset-bottom, 0px); }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); overscroll-behavior: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+button, input { font: inherit; color: inherit; }
+.hidden { display: none !important; }
+
+/* 設定 */
+#setup { min-height: 100%; }
+.wrap { max-width: 440px; margin: 0 auto; padding: calc(24px + var(--safe-t)) 18px calc(28px + var(--safe-b)); display: flex; flex-direction: column; gap: 14px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+.logo { width: 64px; height: 64px; border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+h1 { margin: 0; font-size: 28px; letter-spacing: .05em; }
+.tag { margin: 2px 0 0; color: var(--muted); font-weight: 700; font-size: 14px; }
+.card { background: var(--card); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 1px 0 var(--line); }
+h2 { margin: 0; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+.num { width: 24px; height: 24px; border-radius: 50%; background: var(--brand); display: grid; place-items: center; font-size: 13px; }
+.hint { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.pick { display: grid; place-items: center; min-height: 120px; border: 2px dashed #E5C98F; border-radius: 14px; cursor: pointer; overflow: hidden; background: #FFFBF2; font-weight: 800; color: #B7791F; }
+.pick img { max-height: 220px; border-radius: 10px; margin: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.2); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; background: #F3F4F6; border-radius: 12px; padding: 4px; }
+.seg button { border: 0; background: none; padding: 11px; border-radius: 9px; font-weight: 800; }
+.seg button.on { background: var(--ink); color: #fff; }
+.chips { display: flex; gap: 8px; }
+.chips button { flex: 1; border: 2px solid #E5E7EB; background: #fff; border-radius: 999px; padding: 8px 0; font-weight: 800; }
+.chips button.on { border-color: var(--brand); background: var(--brand); }
+.row { display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
+.sw { appearance: none; width: 50px; height: 30px; border-radius: 999px; background: #D1D5DB; position: relative; transition: .2s; cursor: pointer; }
+.sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: .2s; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+.sw:checked { background: #22C55E; }
+.sw:checked::after { left: 23px; }
+.big { border: 0; border-radius: 16px; padding: 17px; font-size: 18px; font-weight: 900; background: var(--ink); color: #fff; cursor: pointer; }
+.big:active, .sub:active { transform: scale(.98); }
+.sub { border: 0; border-radius: 14px; padding: 13px; font-weight: 800; background: #fff; cursor: pointer; }
+.sub.light { background: rgba(255,255,255,.2); color: #fff; }
+.err { margin: 0; color: #C53030; font-weight: 800; text-align: center; }
+.note { font-size: 13px; color: var(--muted); line-height: 1.7; background: #fff; border-radius: 14px; padding: 12px 14px; }
+
+/* 本番 */
+#stage { position: fixed; inset: 0; background: #000; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; overflow: hidden; }
+#stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+#flash.go { animation: flash .18s ease-out; }
+@keyframes flash { 0% { opacity: .55; } 100% { opacity: 0; } }
+
+/* ネタばらし */
+#reveal { position: fixed; inset: 0; background: var(--brand); color: var(--ink); display: grid; place-items: center; overflow: hidden; }
+#confettiCv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.reveal-inner { position: relative; text-align: center; padding: 24px; display: flex; flex-direction: column; gap: 12px; width: min(380px, 90vw); animation: pop .5s cubic-bezier(.2,1.6,.4,1); }
+@keyframes pop { from { transform: scale(.4); opacity: 0; } }
+.reveal-emoji { font-size: 72px; }
+.reveal-big { font-size: 48px; font-weight: 900; line-height: 1.15; letter-spacing: .04em; }
+.reveal-sub { margin: 0 0 10px; font-weight: 700; line-height: 1.6; }
+#reveal .sub.light { background: rgba(31,41,55,.12); color: var(--ink); }

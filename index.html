@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>パリン</title>
+<meta name="description" content="友達のスマホが「割れた！」ように見えるドッキリアプリ">
+<meta name="theme-color" content="#FFB020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="パリン">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 設定 -->
+<section id="setup">
+  <div class="wrap">
+    <header>
+      <img src="icons/icon-192.png" alt="" class="logo">
+      <div>
+        <h1>パリン</h1>
+        <p class="tag">友達のスマホが「割れた！」ドッキリ</p>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2><span class="num">1</span>なりすまし画面</h2>
+      <p class="hint">直前にホーム画面のスクショを撮って選ぶと、本物そっくりになります。</p>
+      <label id="pickBox" class="pick">
+        <input id="fileInput" type="file" accept="image/*" hidden>
+        <img id="preview" alt="" class="hidden">
+        <span id="pickText">＋ スクショを選ぶ</span>
+      </label>
+    </div>
+
+    <div class="card">
+      <h2><span class="num">2</span>割れるきっかけ</h2>
+      <div class="seg" id="triggerSeg">
+        <button data-v="touch">触った瞬間</button>
+        <button data-v="timer">タイマー</button>
+      </div>
+      <div id="timerBox" class="chips hidden">
+        <button data-s="5">5秒</button>
+        <button data-s="10">10秒</button>
+        <button data-s="30">30秒</button>
+        <button data-s="60">1分</button>
+      </div>
+      <p id="triggerHint" class="hint"></p>
+    </div>
+
+    <div class="card">
+      <h2><span class="num">3</span>演出</h2>
+      <label class="row"><span>割れる音</span><input id="soundSw" type="checkbox" class="sw" checked></label>
+      <label class="row"><span>振動（Androidのみ）</span><input id="vibeSw" type="checkbox" class="sw" checked></label>
+    </div>
+
+    <p id="err" class="err hidden"></p>
+    <button id="startBtn" class="big">スタンバイ開始</button>
+    <button id="demoBtn" class="sub">自分で試してみる</button>
+
+    <div class="note">
+      <b>途中でやめるとき</b>：画面の左上を2秒長押し<br>
+      <b>iPhoneの人</b>：共有ボタン →「ホーム画面に追加」から開くと、ブラウザのバーが消えて全画面になります
+    </div>
+  </div>
+</section>
+
+<!-- 本番 -->
+<section id="stage" class="hidden">
+  <canvas id="baseCv"></canvas>
+  <canvas id="crackCv"></canvas>
+  <div id="flash"></div>
+</section>
+
+<!-- ネタばらし -->
+<section id="reveal" class="hidden">
+  <canvas id="confettiCv"></canvas>
+  <div class="reveal-inner">
+    <div class="reveal-emoji">😜</div>
+    <div class="reveal-big">ドッキリ<br>大成功！</div>
+    <p class="reveal-sub">スマホは無事です。<br>割れてたのは画面の中だけ。</p>
+    <button id="againBtn" class="big">もう一回しかける</button>
+    <button id="backBtn" class="sub light">設定に戻る</button>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
